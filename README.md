@@ -87,3 +87,21 @@ draw1({
     y: 20
 })
 ~~~
+
+Access Modifier: private, public, protected
+~~~ts
+class Point {
+    
+    constructor(private x?: number,private y?: number) {}
+
+    draw() {
+        console.log("X: " + this.x + ", Y: " + this.y);
+    }
+}
+
+let pointer = new Point(10);
+pointer.draw();
+~~~
+
+Ex: When Accessors are only available when targeting ES5 error occurs
+tsc LikeMain.ts --target ES5 && node LikeMain.js
