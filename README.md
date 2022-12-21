@@ -105,3 +105,37 @@ pointer.draw();
 
 Ex: When Accessors are only available when targeting ES5 error occurs
 tsc LikeMain.ts --target ES5 && node LikeMain.js
+
+Selectors
+<courses>             -> "courses"
+<div class="courses"> -> ".courses"
+<div id="courses">    -> "#courses"
+
+Generate Components from cli
+ - ng g c componentName
+
+
+Directives
+~~~ts
+import { Component } from "@angular/core"
+
+@Component({
+    selector: 'courses',
+    template: `
+        <h2>{{getTitle()}}</h2>
+        <ul>
+            <li *ngFor="let course of courses">
+                {{ course }}
+            </li>
+        </ul>
+        `
+})
+export class CoursesComponent {
+    title = "List of courses";
+    courses = ["course1", "course2", "course3"];
+
+    getTitle() {
+        return this.title;
+    }
+}
+~~~
