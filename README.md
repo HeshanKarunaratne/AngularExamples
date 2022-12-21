@@ -177,3 +177,57 @@ body {
     padding: 20px;
 }
 ~~~
+
+Class Binding: Add classes dynamically based on condition
+~~~ts
+import { Component } from "@angular/core"
+
+@Component({
+    selector: 'courses',
+    template: `
+            <button class="btn btn-primary" [class.active]="isActive">Save</button>
+        `
+})
+export class CoursesComponent {
+    isActive = true;
+}
+~~~
+
+Style Binding
+~~~ts
+import { Component } from "@angular/core"
+
+@Component({
+    selector: 'courses',
+    template: `
+            <h1>Here</h1>
+            <button [style.backgroundColor]="isActive ? 'blue': 'white'" >Save</button>
+        `
+})
+export class CoursesComponent {
+    isActive = false;
+}
+~~~
+
+Event Binding and Bubbling
+~~~ts
+import { Component } from "@angular/core"
+
+@Component({
+    selector: 'courses',
+    template: `
+            <div (click)="onDivClicked()">
+                <button (click)="onSave($event)" >Save</button>
+            </div>
+        `
+})
+export class CoursesComponent {
+    onDivClicked() {
+        console.log("Div clicked");
+    }
+    onSave(event: Event) {
+        event.stopPropagation();
+        console.log("Button clicked ", event);
+    }
+}
+~~~
