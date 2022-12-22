@@ -311,3 +311,33 @@ export class CoursesComponent {
     }
 }
 ~~~
+
+Creating custom Pipes: Need to include the newly created custom pipe in app.modules.ts declarations list
+~~~ts
+import { Pipe, PipeTransform } from "@angular/core";
+
+@Pipe({
+    name: 'summary'
+})
+export class SummaryPipe implements PipeTransform {
+    transform(value: string, limit?: number) {
+        if (!value) return null;
+
+        let actualLimit = (limit) ? limit : 50;
+        return value.substring(0, actualLimit) + "...";
+    }
+}
+
+
+import { Component } from "@angular/core"
+
+@Component({
+    selector: 'courses',
+    template: `
+           {{ text | summary:10 }} <br/>
+        `
+})
+export class CoursesComponent {
+    text = `vdsvsdv sdvsdvvdv dvdavdv adcvadvadva advadvadvadv advadvadvad vadvadvadvdav advadvad advadvadv advadvad vadvavav advadvadv advadvdavdav davaddavdav davadvadv adadadvadv vdavdavdavdvd advdvr bd fs bsfbsfbs zgash bfsbsfhd dv adsfhsfhsf adgsr hf hsfdsgad gad g dag dag adgg`;
+}
+~~~

@@ -3,19 +3,9 @@ import { Component } from "@angular/core"
 @Component({
     selector: 'courses',
     template: `
-           {{ course.title | uppercase | lowercase}} <br/>
-           {{ course.students | number}} <br/>
-           {{ course.rating | number:'2.1-1' }} <br/>
-           {{ course.price | currency:'AUD':false:'3.2-2'}} <br/>
-           {{ course.releaseDate | date:'shortDate' }} <br/>
+           {{ text | summary:10 }} <br/>
         `
 })
 export class CoursesComponent {
-    course = {
-        title: "Angular course!!!",
-        rating: 4.9543,
-        students: 30211,
-        price: 109.43,
-        releaseDate: new Date(2016, 3, 1)
-    }
+    text = `vdsvsdv sdvsdvvdv dvdavdv adcvadvadva advadvadvadv advadvadvad vadvadvadvdav advadvad advadvadv advadvad vadvavav advadvadv advadvdavdav davaddavdav davadvadv adadadvadv vdavdavdavdvd advdvr bd fs bsfbsfbs zgash bfsbsfhd dv adsfhsfhsf adgsr hf hsfdsgad gad g dag dag adgg`;
 }
