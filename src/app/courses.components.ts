@@ -3,17 +3,12 @@ import { Component } from "@angular/core"
 @Component({
     selector: 'courses',
     template: `
-            <div (click)="onDivClicked()">
-                <button (click)="onSave($event)" >Save</button>
-            </div>
+           <input [(ngModel)]="email" (keyup.enter)="onKeyUp()" />
         `
 })
 export class CoursesComponent {
-    onDivClicked() {
-        console.log("Div clicked");
-    }
-    onSave(event: Event) {
-        event.stopPropagation();
-        console.log("Button clicked ", event);
+    email: any = "heshan@yahoo.com";
+    onKeyUp() {
+        console.log("here ", this.email);
     }
 }

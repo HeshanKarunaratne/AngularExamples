@@ -231,3 +231,58 @@ export class CoursesComponent {
     }
 }
 ~~~
+
+Event Filtering
+~~~ts
+import { Component } from "@angular/core"
+
+@Component({
+    selector: 'courses',
+    template: `
+           <input (keyup.enter)="onKeyUp()" />
+        `
+})
+export class CoursesComponent {
+    onKeyUp() {
+        console.log("Enter Clicked");
+    }
+}
+~~~
+
+Template Variables
+~~~ts
+import { Component } from "@angular/core"
+
+@Component({
+    selector: 'courses',
+    template: `
+           <input #email (keyup.enter)="onKeyUp(email.value)" />
+        `
+})
+export class CoursesComponent {
+    onKeyUp(email: string) {
+        console.log(email);
+    }
+}
+~~~
+
+ngModel directive is used for 2 way binding
+To access ngModel you need to import  @angular/forms
+
+2-way Binding
+~~~ts
+import { Component } from "@angular/core"
+
+@Component({
+    selector: 'courses',
+    template: `
+           <input [(ngModel)]="email" (keyup.enter)="onKeyUp()" />
+        `
+})
+export class CoursesComponent {
+    email: any = "heshan@yahoo.com";
+    onKeyUp() {
+        console.log("here ", this.email);
+    }
+}
+~~~
