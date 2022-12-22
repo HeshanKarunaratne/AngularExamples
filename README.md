@@ -269,7 +269,7 @@ export class CoursesComponent {
 ngModel directive is used for 2 way binding
 To access ngModel you need to import  @angular/forms
 
-2-way Binding
+Two-way Binding
 ~~~ts
 import { Component } from "@angular/core"
 
@@ -283,6 +283,31 @@ export class CoursesComponent {
     email: any = "heshan@yahoo.com";
     onKeyUp() {
         console.log("here ", this.email);
+    }
+}
+~~~
+
+Built in Pipes
+~~~ts
+import { Component } from "@angular/core"
+
+@Component({
+    selector: 'courses',
+    template: `
+           {{ course.title | uppercase | lowercase}} <br/>
+           {{ course.students | number }} <br/>
+           {{ course.rating | number:'2.1-1' }} <br/>
+           {{ course.price | currency:'AUD':false:'3.2-2' }} <br/>
+           {{ course.releaseDate | date:'shortDate' }} <br/>
+        `
+})
+export class CoursesComponent {
+    course = {
+        title: "Angular course!!!",
+        rating: 4.9543,
+        students: 30211,
+        price: 109.43,
+        releaseDate: new Date(2016, 3, 1)
     }
 }
 ~~~
