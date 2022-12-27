@@ -9,18 +9,21 @@ import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.components';
 import { CourseComponent } from './course/course.component';
 import { AuthorsComponent } from './authors/authors.component';
-
+import { StarComponent } from './star/star.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
     CoursesComponent,
     CourseComponent,
     AuthorsComponent,
-    SummaryPipe
+    SummaryPipe,
+    StarComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [
     CoursesService,
