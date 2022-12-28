@@ -391,3 +391,43 @@ export class StarComponent {
   }
 }
 ~~~
+
+Passing Event Data
+~~~ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'favourite',
+  templateUrl: './star.component.html',
+  styleUrls: ['./star.component.scss'],
+})
+export class StarComponent {
+  @Input("is-favourite") isFavourite: boolean = false;
+  @Output() change = new EventEmitter();
+
+  onClickButton() {
+    this.isFavourite = !this.isFavourite;
+    this.change.emit({ value: this.isFavourite, name: "heshan" });
+  }
+}
+~~~
+
+~~~ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  post = {
+    title: "title",
+    isFavourite: true
+  }
+
+  onFavouriteChange(eventArgs: object) {
+    console.log("favourite changed ", eventArgs);
+  }
+}
+~~~

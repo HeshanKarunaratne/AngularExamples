@@ -11,6 +11,6 @@ export class StarComponent {
 
   onClickButton() {
     this.isFavourite = !this.isFavourite;
-    this.change.emit();
+    this.change.emit({ value: this.isFavourite, name: "heshan" });
   }
 }
