@@ -11,6 +11,8 @@ import { CourseComponent } from './course/course.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { StarComponent } from './star/star.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TitleComponent } from './title/title.component';
+import { TitleCasePipe } from './title-case.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CourseComponent,
     AuthorsComponent,
     SummaryPipe,
-    StarComponent
+    StarComponent,
+    TitleComponent,
+    TitleCasePipe
   ],
   imports: [
     BrowserModule,
