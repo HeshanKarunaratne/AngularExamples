@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
-import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'star',
+  selector: 'favourite',
   templateUrl: './star.component.html',
-  styleUrls: ['./star.component.scss']
+  styleUrls: ['./star.component.scss'],
 })
 export class StarComponent {
-  isClicked = true;
-  color: string = "";
-  onClickText() {
-    this.isClicked ? this.color = "red" : this.color = "blue";
-    this.isClicked = !this.isClicked;
+  @Input() isFavourite: boolean = false;
+
+  onClickButton() {
+    this.isFavourite = !this.isFavourite;
   }
 }

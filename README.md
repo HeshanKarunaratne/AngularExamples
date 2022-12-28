@@ -341,3 +341,29 @@ export class CoursesComponent {
     text = `vdsvsdv sdvsdvvdv dvdavdv adcvadvadva advadvadvadv advadvadvad vadvadvadvdav advadvad advadvadv advadvad vadvavav advadvadv advadvdavdav davaddavdav davadvadv adadadvadv vdavdavdavdvd advdvr bd fs bsfbsfbs zgash bfsbsfhd dv adsfhsfhsf adgsr hf hsfdsgad gad g dag dag adgg`;
 }
 ~~~
+
+Property(Input) and Event Binding(Output) to make a component more reusable.
+
+<favourite></favourite>
+          ||
+          \/
+<favourite [isFavourite]="post.isFavourite" (change)="onFavoutieChange()"></favourite>
+
+1) Adding Input decorator
+~~~ts
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'favourite',
+  templateUrl: './star.component.html',
+  styleUrls: ['./star.component.scss']
+})
+export class StarComponent {
+  @Input()
+  isFavourite: boolean = false;
+
+  onClickButton() {
+    this.isFavourite = !this.isFavourite;
+  }
+}
+~~~
