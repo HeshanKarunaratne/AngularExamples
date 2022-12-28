@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'favourite',
@@ -6,9 +6,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./star.component.scss'],
 })
 export class StarComponent {
-  @Input() isFavourite: boolean = false;
+  @Input("is-favourite") isFavourite: boolean = false;
+  @Output() change = new EventEmitter();
 
   onClickButton() {
     this.isFavourite = !this.isFavourite;
+    this.change.emit();
   }
 }

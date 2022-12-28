@@ -349,7 +349,7 @@ Property(Input) and Event Binding(Output) to make a component more reusable.
           \/
 <favourite [isFavourite]="post.isFavourite" (change)="onFavoutieChange()"></favourite>
 
-1) Adding Input decorator
+1) Adding Input decorator- use aliases
 ~~~ts
 import { Component, Input } from '@angular/core';
 
@@ -359,11 +359,35 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./star.component.scss']
 })
 export class StarComponent {
-  @Input()
+  @Input("is-favourite")
   isFavourite: boolean = false;
 
   onClickButton() {
     this.isFavourite = !this.isFavourite;
+  }
+}
+~~~
+
+Raising Events
+~~~ts
+<favourite [is-favourite]="post.isFavourite" (change)="onFavouriteChange()"></favourite>
+~~~
+
+~~~ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'favourite',
+  templateUrl: './star.component.html',
+  styleUrls: ['./star.component.scss'],
+})
+export class StarComponent {
+  @Input("is-favourite") isFavourite: boolean = false;
+  @Output() change = new EventEmitter();
+
+  onClickButton() {
+    this.isFavourite = !this.isFavourite;
+    this.change.emit();
   }
 }
 ~~~
