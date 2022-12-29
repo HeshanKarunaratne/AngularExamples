@@ -13,6 +13,7 @@ import { StarComponent } from './star/star.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TitleComponent } from './title/title.component';
 import { TitleCasePipe } from './title-case.pipe';
+import { PanelComponent } from './panel/panel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { TitleCasePipe } from './title-case.pipe';
     SummaryPipe,
     StarComponent,
     TitleComponent,
-    TitleCasePipe
+    TitleCasePipe,
+    PanelComponent
   ],
   imports: [
     BrowserModule,

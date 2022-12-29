@@ -476,3 +476,38 @@ export class StarComponent {
 }
 
 ~~~
+
+Easy html tag generation
+
+div.panel.panel-default>div.panel-heading+div.panel.body
+PRESS tab to generate below format
+
+~~~html
+<div class="panel panel-default">
+    <div class="panel-heading">Heading</div>
+    <div class="panel-body">Body</div>
+</div>
+~~~
+
+Using ng-content for reusable components
+
+~~~html
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <ng-content select=".heading"></ng-content>
+    </div>
+    <div class="panel-body">
+        <ng-content select=".body"></ng-content>
+    </div>
+</div>
+~~~
+
+~~~html
+<bootstrap-panel>
+    <div class="heading">Heading</div>
+    <div class="body">
+        <h2>body</h2>
+        <p>Heshans paragraph</p>
+    </div>
+</bootstrap-panel>
+~~~
