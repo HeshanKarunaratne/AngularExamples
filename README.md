@@ -431,3 +431,48 @@ export class AppComponent {
   }
 }
 ~~~
+
+Different ways to define styles
+style tag in html > inline styles in html > styles in ts(styles or stylesUrl)
+~~~ts
+<style>
+    .star-color {
+        font-size: 20rem;
+    }
+</style>
+
+<h1 class="star-color" [class.star-color-red]="isFavourite" [class.star-color-blue]="!isFavourite"
+    (click)="onClickButton()">
+    heshan</h1>
+~~~
+
+~~~ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'favourite',
+  templateUrl: './star.component.html',
+
+  styles: [
+    `
+    .star-color {
+      font-size: 5rem;
+    }
+    .star-color-red {
+    color: green;
+    }
+    `
+  ],
+  styleUrls: ['./star.component.scss']
+})
+export class StarComponent {
+  @Input("is-favourite") isFavourite: boolean = false;
+  @Output() change = new EventEmitter();
+
+  onClickButton() {
+    this.isFavourite = !this.isFavourite;
+    this.change.emit({ value: this.isFavourite, name: "heshan" });
+  }
+}
+
+~~~

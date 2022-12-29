@@ -3,7 +3,18 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'favourite',
   templateUrl: './star.component.html',
-  styleUrls: ['./star.component.scss'],
+
+  styles: [
+    `
+    .star-color {
+      font-size: 5rem;
+    }
+    .star-color-red {
+    color: green;
+    }
+    `
+  ],
+  styleUrls: ['./star.component.scss']
 })
 export class StarComponent {
   @Input("is-favourite") isFavourite: boolean = false;
