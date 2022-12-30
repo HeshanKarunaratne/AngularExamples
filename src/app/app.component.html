@@ -30,10 +30,9 @@
     <div *ngSwitchDefault>Otherwise</div>
 </div> -->
 
-<button (click)="onAdd()">Add</button>
+<button (click)="loadCourses()">Load</button>
 <ul>
-    <li *ngFor="let course of courses; even as even; index as i">
+    <li *ngFor="let course of courses; even as even; index as i; trackBy: trackCourse">
         {{i}} - {{course.name}} <span *ngIf="even">(EVEN)</span>
-        <button (click)="onChange(course)">Remove</button>
     </li>
 </ul>
