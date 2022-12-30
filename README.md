@@ -523,3 +523,46 @@ ng-container: If you dont need to render an additional html tag use ng-container
     </div>
 </bootstrap-panel>
 ~~~
+
+Directives
+
+1) ngIf
+~~~html
+<div *ngIf="courses.length > 0">
+    List of courses
+</div>
+<div *ngIf="courses.length == 0">
+    No courses yet
+</div>
+~~~
+
+~~~html
+<div *ngIf="courses.length > 0; else noCourses">
+    List of courses
+</div>
+<ng-template #noCourses>
+    No courses yet
+</ng-template>
+~~~
+
+~~~html
+<div *ngIf="courses.length > 0; then coursesList else noCourses">
+    List of courses
+</div>
+<ng-template #coursesList>
+    List of courses
+</ng-template>
+<ng-template #noCourses>
+    No courses yet
+</ng-template>
+~~~
+
+Or you can use [hidden] 
+~~~html
+<div [hidden]="courses.length == 0">
+    List of courses
+</div>
+<div [hidden]="courses.length > 0">
+    No courses yet
+</div>
+~~~

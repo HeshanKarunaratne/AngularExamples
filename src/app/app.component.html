@@ -10,5 +10,11 @@
         <p>Heshans paragraph</p>
     </div>
 </bootstrap-panel> -->
+<!-- <app-like [likesCount]="tweet.likesCount" [isLiked]="tweet.isLiked" (change)="onBtnClicked($event)"></app-like> -->
 
-<app-like [likesCount]="tweet.likesCount" [isLiked]="tweet.isLiked" (change)="onBtnClicked($event)"></app-like>
+<div [hidden]="courses.length == 0">
+    List of courses
+</div>
+<div [hidden]="courses.length > 0">
+    No courses yet
+</div>

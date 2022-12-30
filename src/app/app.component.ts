@@ -5,23 +5,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  post = {
-    title: "title",
-    isFavourite: true
-  }
-
-  onFavouriteChange(eventArgs: object) {
-    console.log("favourite changed ", eventArgs);
-  }
-
-  tweet = {
-    body: "here is the body of the twet...",
-    isLiked: false,
-    likesCount: 0
-  }
-
-  onBtnClicked(args: boolean) {
-    console.log("value is ", args);
-  }
-
+  courses = [1];
 }
