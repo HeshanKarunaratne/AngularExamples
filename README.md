@@ -580,3 +580,12 @@ Or you can use [hidden]
     <div *ngSwitchDefault>Otherwise</div>
 </div>
 ~~~
+
+3) ngFor
+~~~html
+<ul>
+    <li *ngFor="let course of courses; even as even; index as i">
+        {{i}} - {{course.name}} <span *ngIf="even">(EVEN)</span>
+    </li>
+</ul>
+~~~
