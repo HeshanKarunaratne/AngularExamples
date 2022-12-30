@@ -511,3 +511,15 @@ Using ng-content for reusable components
     </div>
 </bootstrap-panel>
 ~~~
+
+ng-container: If you dont need to render an additional html tag use ng-container that only renders the value
+
+~~~html
+<bootstrap-panel>
+    <ng-container class="heading">Heading</ng-container>
+    <div class="body">
+        <h2>body</h2>
+        <p>Heshans paragraph</p>
+    </div>
+</bootstrap-panel>
+~~~
