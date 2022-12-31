@@ -602,3 +602,13 @@ Can be converted to below format
     'bi-star':!isLiked
 }" (click)="onFavouriteClick()"></i>
 ~~~
+
+5) ngStyle
+~~~html
+<button [ngStyle]="{
+        'backgroundColor':canSave ? 'blue':'gray',
+        'color':canSave ? 'white':'black',
+        'fontWeight':canSave ? 'bold':'normal'
+    }">
+    Save</button>
+~~~

@@ -30,9 +30,16 @@
     <div *ngSwitchDefault>Otherwise</div>
 </div> -->
 
-<button (click)="loadCourses()">Load</button>
+<!-- <button (click)="loadCourses()">Load</button>
 <ul>
     <li *ngFor="let course of courses; even as even; index as i; trackBy: trackCourse">
         {{i}} - {{course.name}} <span *ngIf="even">(EVEN)</span>
     </li>
-</ul>
+</ul> -->
+
+<button [ngStyle]="{
+        'backgroundColor':canSave ? 'blue':'gray',
+        'color':canSave ? 'white':'black',
+        'fontWeight':canSave ? 'bold':'normal'
+    }">
+    Save</button>
