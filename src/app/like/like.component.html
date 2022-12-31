@@ -1,2 +1,5 @@
-<i class="bi" [class.bi-star-fill]="isLiked" [class.bi-star]="!isLiked" (click)="onFavouriteClick()"></i>
+<i class="bi" [ngClass]="{
+    'bi-star-fill':isLiked,
+    'bi-star':!isLiked
+}" (click)="onFavouriteClick()"></i>
 {{likesCount}}

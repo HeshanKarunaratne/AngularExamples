@@ -589,3 +589,16 @@ Or you can use [hidden]
     </li>
 </ul>
 ~~~
+
+4) ngClass
+~~~html
+<i class="bi" [class.bi-star-fill]="isLiked" [class.bi-star]="!isLiked" (click)="onFavouriteClick()"></i>
+~~~
+
+Can be converted to below format
+~~~html
+<i class="bi" [ngClass]="{
+    'bi-star-fill':isLiked,
+    'bi-star':!isLiked
+}" (click)="onFavouriteClick()"></i>
+~~~
