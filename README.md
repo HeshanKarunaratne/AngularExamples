@@ -653,3 +653,8 @@ ngModel
  <input ngModel name="firstName" #firstName="ngModel" (change)="log(firstName)" id="firstName" type="text"
             class="form-control">
 ~~~
+
+Touched and not Valid
+~~~html
+<div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required</div>
+~~~
