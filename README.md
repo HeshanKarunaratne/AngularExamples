@@ -680,3 +680,10 @@ Specific Validations
     <button class="btn btn-primary">Submit</button>
 </form>
 ~~~
+
+Styling invalid input fields
+~~~scss
+.form-control.ng-touched.ng-invalid {
+    border: 2px red solid;
+}
+~~~
