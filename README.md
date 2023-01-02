@@ -639,3 +639,17 @@ export class InputFormatDirective {
   }
 }
 ~~~
+
+Form Control: value, touched, untouched, dirty, pristine, valid, errors
+Form Group: value, touched, untouched, dirty, pristine, valid, errors
+
+Reactive Forms: More control over validation login, Good for conplex forms, Unit testable
+Template Driven Forms: Simple Forms, Simple validation, Less code, Easier to create
+
+ngModel
+1) If adding ngmodel you need to add 'name' attribute as well
+2) If you need to log ngModel value need to create a template variable and assign it ngModel value and pass it to a log() so that it can be console.log()
+~~~html
+ <input ngModel name="firstName" #firstName="ngModel" (change)="log(firstName)" id="firstName" type="text"
+            class="form-control">
+~~~
