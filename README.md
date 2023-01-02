@@ -658,3 +658,25 @@ Touched and not Valid
 ~~~html
 <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">First Name is required</div>
 ~~~
+
+Specific Validations
+~~~html
+<form>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input required minlength="4" maxlength="10" pattern="banana" ngModel name="firstName" #firstName="ngModel"
+            (change)="log(firstName)" id="firstName" type="text" class="form-control">
+        <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+            <div *ngIf="firstName.errors?.['required']">First name is required</div>
+            <div *ngIf="firstName.errors?.['minlength']">First should be of minimum {{
+                firstName.errors?.['minlength']?.requiredLength }} characters</div>
+            <div *ngIf="firstName.errors?.['pattern']">Doesn't match the pattern</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea ngModel name="comment" id="comment" type="text" rows="30" cols="30" class="form-control"></textarea>
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>
+~~~
