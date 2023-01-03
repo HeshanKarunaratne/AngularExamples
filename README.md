@@ -713,3 +713,8 @@ ngModelGroup
     <button class="btn btn-primary">Submit</button>
 </form>
 ~~~
+
+Two classes to keep track of state of Input fields and validity
+FormControl: One Input Field     <------------------------ngModel
+FormGroup: Group of Input Fields <------------------------ngForm       ------> output ngSubmit
+                                                          ngModelGroup
