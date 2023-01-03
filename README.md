@@ -687,3 +687,29 @@ Styling invalid input fields
     border: 2px red solid;
 }
 ~~~
+
+ngForm
+~~~html
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div ngModelGroup="contact" #contact="ngModelGroup">
+    </div>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea ngModel name="comment" id="comment" type="text" rows="30" cols="30" class="form-control"></textarea>
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>
+~~~
+
+ngModelGroup
+~~~html
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div ngModelGroup="contact" #contact="ngModelGroup">
+        <div class="form-group">
+        </div>
+    </div>
+    <div class="form-group">
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>
+~~~
