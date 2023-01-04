@@ -726,3 +726,17 @@ Disable Submit Button
     <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>
 ~~~
+
+Working With Checkboxes
+~~~html
+<div class="checkbox">
+        <label>
+            <input type="checkbox" ngModel name="isSubscribed"> Subscribe to mailing list
+        </label>
+</div>
+~~~
+
+See the Form in a form of JSON
+~~~html
+<p>{{f.value | json}}</p>
+~~~
