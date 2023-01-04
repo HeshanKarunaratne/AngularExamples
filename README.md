@@ -740,3 +740,14 @@ See the Form in a form of JSON
 ~~~html
 <p>{{f.value | json}}</p>
 ~~~
+
+Dropdown List:
+*** Use ngValue when you want to map complex object rather than passing only id to value
+~~~html
+<div class="form-group">
+        <label for="contactMethod">Contact Method</label>
+        <select multiple ngModel name="contactMethod" id="contactMethod" class="form-control">
+            <option *ngFor="let method of contactMethods" [ngValue]="method">{{method.name}}</option>
+        </select>
+</div>
+~~~
