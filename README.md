@@ -718,3 +718,11 @@ Two classes to keep track of state of Input fields and validity
 FormControl: One Input Field     <------------------------ngModel
 FormGroup: Group of Input Fields <------------------------ngForm       ------> output ngSubmit
                                                           ngModelGroup
+
+
+Disable Submit Button
+~~~html
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>
+~~~
