@@ -751,3 +751,13 @@ Dropdown List:
         </select>
 </div>
 ~~~
+
+Radio Buttons
+~~~html
+<div *ngFor="let method of contactMethods" class="radio">
+        <label>
+            <input ngModel type="radio" name="contactMethod" [value]="method.id">
+            {{ method.name }}
+        </label>
+</div>
+~~~
