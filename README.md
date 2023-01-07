@@ -761,3 +761,83 @@ Radio Buttons
         </label>
 </div>
 ~~~
+
+Reactive Forms
+
+Need to import below module
+    import { ReactiveFormsModule } from '@angular/forms';
+
+~~~ts
+import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
+})
+export class SignupFormComponent {
+  form = new FormGroup({
+    username: new FormControl(),
+    password: new FormControl()
+  });
+}
+~~~
+
+~~~html
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input formControlName="username" id="username" type="text" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input formControlName="password" id="password" type="text" class="form-control">
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
+~~~
+
+Add Validations
+~~~ts
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
+})
+export class SignupFormComponent {
+  form = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  });
+
+  get username() {
+    return this.form.get('username');
+  }
+
+  get password() {
+    return this.form.get('password');
+  }
+}
+~~~
+
+~~~html
+<form [formGroup]="form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input formControlName="username" id="username" type="text" class="form-control">
+        <div *ngIf="username?.touched && username?.invalid" class="alert alert-danger">Username
+            is required</div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input formControlName="password" id="password" type="text" class="form-control">
+        <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">Password
+            is required</div>
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
+~~~
