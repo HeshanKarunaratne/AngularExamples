@@ -19,9 +19,9 @@
             <div *ngIf="category.errors?.['required']">Category is required</div>
         </div>
     </div>
-    <div class="radio">
-        <label>
-            <input #isGuarantee="ngModel" ngModel type="radio" name="isGuarantee" [value]="isGuarantee.valid">
+    <div class="checkbox">
+        <label for="isGuarantee">
+            <input #isGuarantee="ngModel" ngModel type="checkbox" name="isGuarantee">
             30-day money-back guarantee
         </label>
     </div>
