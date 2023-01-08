@@ -841,3 +841,26 @@ export class SignupFormComponent {
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>
 ~~~
+
+Creating Custom Validation
+~~~ts
+import { AbstractControl, ValidationErrors } from "@angular/forms";
+
+export class UsernameValidators {
+    static cannotContainSpace(control: AbstractControl): ValidationErrors | null {
+        if ((control.value as string).indexOf(' ') >= 0)
+            return { cannotContainSpace: true };
+
+        return null;
+    }
+}
+~~~
+
+~~~html
+<div *ngIf="username?.touched && username?.invalid" class="alert alert-danger">
+            <div *ngIf="username?.errors?.['required']">Username is required</div>
+            <div *ngIf="username?.errors?.['cannotContainSpace']">Username cannot contain space</div>
+            <div *ngIf="username?.errors?.['minlength']">Minimum length is {{
+                username?.errors?.['minlength']?.requiredLength}}</div>
+</div>
+~~~
