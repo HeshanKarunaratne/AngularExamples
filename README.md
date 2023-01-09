@@ -866,3 +866,36 @@ export class UsernameValidators {
 ~~~
 
 When we are using asynOperations for validatorFn the signature changes
+
+AsyncValidators: returns a Promise object of ValidationErrors or null
+For a Promise you need to supply a resolve and a reject
+Rather than using return use resolve and reject (when return used it automatically takes out from the block- but with resolve and reject this behaviour is not happening)
+
+~~~ts
+import { AbstractControl, ValidationErrors } from "@angular/forms";
+
+export class UsernameValidators {
+    static cannotContainSpace(control: AbstractControl): ValidationErrors | null {
+        if ((control.value as string).indexOf(' ') >= 0)
+            return { cannotContainSpace: true };
+
+        return null;
+    }
+
+    static shouldBeUnique(control: AbstractControl): Promise<ValidationErrors | null> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (control.value === 'heshan')
+                    resolve({ shouldBeUnique: true });
+                else
+                    resolve(null);
+            }, 2000);
+        });
+    }
+}
+~~~
+
+This will trigger error after 2 seconds since we used setTimeout async function
+~~~html
+<div *ngIf="username?.errors?.['shouldBeUnique']">Username already taken</div>
+~~~
