@@ -904,3 +904,18 @@ Loader property pending
 ~~~html
 <div *ngIf="username?.pending">Checking for uniqueness...</div>
 ~~~
+
+Adding Validation to the Form
+~~~ts
+ login() {
+    this.form.setErrors({
+      invalidLogin: true
+    });
+  }
+~~~
+
+~~~html
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div *ngIf="form.errors" class="alert alert-danger">Username and Password is invalid</div>
+</form>
+~~~
