@@ -899,3 +899,8 @@ This will trigger error after 2 seconds since we used setTimeout async function
 ~~~html
 <div *ngIf="username?.errors?.['shouldBeUnique']">Username already taken</div>
 ~~~
+
+Loader property pending
+~~~html
+<div *ngIf="username?.pending">Checking for uniqueness...</div>
+~~~
