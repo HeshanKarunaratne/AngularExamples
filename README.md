@@ -919,3 +919,59 @@ Adding Validation to the Form
     <div *ngIf="form.errors" class="alert alert-danger">Username and Password is invalid</div>
 </form>
 ~~~
+
+FormGroup
+~~~ts
+import { UsernameValidators } from './username.validators';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'signup-form',
+  templateUrl: './signup-form.component.html',
+  styleUrls: ['./signup-form.component.css']
+})
+export class SignupFormComponent {
+  form = new FormGroup({
+    account: new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        UsernameValidators.cannotContainSpace
+      ], UsernameValidators.shouldBeUnique),
+      password: new FormControl('', Validators.required)
+    })
+  });
+
+  get username() {
+    return this.form.get('account.username');
+  }
+
+  get password() {
+    return this.form.get('account.password');
+  }
+
+  login() {
+    this.form.setErrors({
+      invalidLogin: true
+    });
+  }
+}
+~~~
+
+~~~html
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div *ngIf="form.errors" class="alert alert-danger">Username and Password is invalid</div>
+    <div formGroupName="account">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input formControlName="username" id="username" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input formControlName="password" id="password" type="text" class="form-control">
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>
+~~~
