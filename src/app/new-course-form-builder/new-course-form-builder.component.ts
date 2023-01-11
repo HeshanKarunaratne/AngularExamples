@@ -19,4 +19,12 @@ export class NewCourseFormBuilderComponent {
       topics: fb.array([])
     })
   }
+
+  get topics() {
+    return this.form.get('topics') as FormArray;
+  }
+
+  getControls() {
+    return (this.topics).controls;
+  }
 }
