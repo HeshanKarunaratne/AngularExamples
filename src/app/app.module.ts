@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses.components';
@@ -24,6 +25,7 @@ import { CourseFormComponent } from './course-form/course-form.component';
 import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
 import { NewCourseFormBuilderComponent } from './new-course-form-builder/new-course-form-builder.component';
 import { PasswordChangeFormComponent } from './password-change-form/password-change-form.component';
+import { PostsComponent } from './posts/posts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,18 +45,20 @@ import { PasswordChangeFormComponent } from './password-change-form/password-cha
     SignupFormComponent,
     NewCourseFormComponent,
     NewCourseFormBuilderComponent,
-    PasswordChangeFormComponent
+    PasswordChangeFormComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     FontAwesomeModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     CoursesService,
-    AuthorsService
+    AuthorsService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1048,3 +1048,48 @@ export class NewCourseFormBuilderComponent {
   }
 }
 ~~~
+
+Consuming HTTP Services
+
+~~~ts
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [
+  ],
+  imports: [
+    HttpClientModule
+  ],
+  providers: [
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+~~~
+
+~~~ts
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss']
+})
+export class PostsComponent {
+  posts: any = [];
+  constructor(http: HttpClient) {
+    http.get('https://jsonplaceholder.typicode.com/posts')
+      .subscribe(response => {
+        console.log(response);
+        this.posts = response;
+      })
+  }
+}
+~~~
+
+~~~html
+<ul class="list-group">
+    <li *ngFor="let post of posts" class="list-group-item">{{post.title}}</li>
+</ul>
+~~~
