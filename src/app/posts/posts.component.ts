@@ -28,4 +28,12 @@ export class PostsComponent {
         this.posts.splice(0, 0, post);
       });
   }
+
+  updatePost(post: any) {
+    this.http.patch(this.url + "/" + post.id, JSON.stringify({
+      isRead: true
+    })).subscribe(response => {
+      console.log(response);
+    })
+  }
 }

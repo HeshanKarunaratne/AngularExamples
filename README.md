@@ -1128,3 +1128,35 @@ export class PostsComponent {
   }
 }
 ~~~
+
+Update Posts
+
+~~~ts
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss']
+})
+export class PostsComponent {
+  posts: any = [];
+  private url = "https://jsonplaceholder.typicode.com/posts";
+  constructor(private http: HttpClient) {
+    http.get(this.url)
+      .subscribe(response => {
+        console.log(response);
+        this.posts = response;
+      })
+  }
+
+  updatePost(post: any) {
+    this.http.patch(this.url + "/" + post.id, JSON.stringify({
+      isRead: true
+    })).subscribe(response => {
+      console.log(response);
+    })
+  }
+}
+~~~
