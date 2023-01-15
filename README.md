@@ -1205,7 +1205,7 @@ import { Component, OnInit } from '@angular/core';
 export class PostsComponent implements OnInit {
   posts: any = [];
   private url = "https://jsonplaceholder.typicode.com/posts";
-  
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -1213,6 +1213,91 @@ export class PostsComponent implements OnInit {
       .subscribe(response => {
         console.log(response);
         this.posts = response;
+      })
+  }
+}
+~~~
+
+Seperation of Concerns
+
+~~~ts
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
+
+  private url = "https://jsonplaceholder.typicode.com/posts";
+
+  constructor(private http: HttpClient) { }
+
+  getPosts() {
+    return this.http.get(this.url);
+  }
+
+  createPost(post: any) {
+    return this.http.post(this.url, JSON.stringify(post));
+  }
+
+  updatePost(post: any) {
+    return this.http.patch(this.url + "/" + post.id, JSON.stringify({
+      isRead: true
+    }))
+  }
+
+  deletePost(id: any) {
+    return this.http.delete(this.url + "/" + id);
+  }
+}
+~~~
+
+~~~ts
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../services/post.service';
+
+@Component({
+  selector: 'posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss']
+})
+export class PostsComponent implements OnInit {
+  posts: any = [];
+  constructor(private service: PostService) { }
+
+  ngOnInit() {
+    this.service.getPosts()
+      .subscribe(response => {
+        console.log(response);
+        this.posts = response;
+      })
+  }
+
+  createPost(input: HTMLInputElement) {
+    let post: any = { title: input.value };
+    input.value = "";
+
+    this.service.createPost(post)
+      .subscribe(data => {
+        let id = (data as any).id;
+        post['id'] = id;
+        this.posts.splice(0, 0, post);
+      });
+  }
+
+  updatePost(post: any) {
+    this.service.updatePost(post)
+      .subscribe(response => {
+        console.log(response);
+      })
+  }
+
+  deletePost(post: any) {
+    this.service.deletePost(post.id)
+      .subscribe(response => {
+        let index = this.posts.indexOf(post);
+        this.posts.splice(index, 1);
       })
   }
 }
