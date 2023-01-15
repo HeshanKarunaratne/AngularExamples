@@ -1190,3 +1190,30 @@ export class PostsComponent {
   }
 }
 ~~~
+
+ngOnInit: Call http endpoints inside ngOnInit life cycle hooks
+
+~~~ts
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss']
+})
+export class PostsComponent implements OnInit {
+  posts: any = [];
+  private url = "https://jsonplaceholder.typicode.com/posts";
+  
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    this.http.get(this.url)
+      .subscribe(response => {
+        console.log(response);
+        this.posts = response;
+      })
+  }
+}
+~~~
