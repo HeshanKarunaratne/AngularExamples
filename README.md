@@ -1160,3 +1160,33 @@ export class PostsComponent {
   }
 }
 ~~~
+
+Delete Posts
+
+~~~ts
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss']
+})
+export class PostsComponent {
+  posts: any = [];
+  private url = "https://jsonplaceholder.typicode.com/posts";
+  constructor(private http: HttpClient) {
+    http.get(this.url)
+      .subscribe(response => {
+        console.log(response);
+        this.posts = response;
+      })
+  }
+  deletePost(post: any) {
+    this.http.delete(this.url + "/" + post.id).subscribe(response => {
+        let index = this.posts.indexOf(post);
+        this.posts.splice(index, 1);
+    })
+  }
+}
+~~~
