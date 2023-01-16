@@ -1305,3 +1305,18 @@ export class PostsComponent implements OnInit {
 
 Unexpected Errors: Server is offline, Network is down, Unhandled exceptions
 Expected Errors: Not Found(404), Bad Request(400)
+
+
+Handling Unexpected Errors
+~~~ts
+  ngOnInit() {
+    this.service.getPosts()
+      .subscribe(response => {
+        console.log(response);
+        this.posts = response;
+      }, error => {
+        alert("An Unexpected Error occurred.");
+        console.log(error);
+      })
+  }
+~~~
