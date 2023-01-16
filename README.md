@@ -1302,3 +1302,6 @@ export class PostsComponent implements OnInit {
   }
 }
 ~~~
+
+Unexpected Errors: Server is offline, Network is down, Unhandled exceptions
+Expected Errors: Not Found(404), Bad Request(400)
