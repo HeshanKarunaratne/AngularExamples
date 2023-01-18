@@ -1342,3 +1342,99 @@ Handling Expected Errors
         })
   }
 ~~~
+
+Throwing Application specific Errors
+~~~ts
+import { BadInput } from '../common/bad-input';
+import { NotFoundError } from './../common/not-found-error';
+import { AppError } from './../common/app-error';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { Observable, throwError, EMPTY } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
+
+  private url = "https://jsonplaceholder.typicode.com/posts";
+
+  constructor(private http: HttpClient) { }
+
+  createPost(post: any) {
+    return this.http.post(this.url, JSON.stringify(post)).pipe(catchError((error: Response) => {
+      if (error.status === 400)
+        return throwError(new BadInput(error.json()));
+
+      return throwError(new AppError(error.json()));
+    }));
+  }
+
+  deletePost(id: any) {
+    return this.http.delete(this.url + "/" + id).pipe(catchError((error: Response) => {
+      if (error.status === 404)
+        return throwError(new NotFoundError());
+
+      return throwError(new AppError(error.json()));
+    }));
+  }
+}
+~~~
+
+~~~ts
+import { BadInput } from '../common/bad-input';
+import { NotFoundError } from './../common/not-found-error';
+import { AppError } from './../common/app-error';
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../services/post.service';
+
+@Component({
+  selector: 'posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss']
+})
+export class PostsComponent implements OnInit {
+  posts: any = [];
+  constructor(private service: PostService) { }
+
+  createPost(input: HTMLInputElement) {
+    let post: any = { title: input.value };
+    input.value = "";
+
+    this.service.createPost(post)
+      .subscribe(
+        response => {
+          let id = (response as any).id;
+          post['id'] = id;
+          this.posts.splice(0, 0, post);
+        },
+        (error: AppError) => {
+          if (error instanceof BadInput) {
+            //this.form.setErrors(error.json())
+
+          } else {
+            alert("An Unexpected Error occurred.");
+            console.log(error);
+          }
+        });
+  }
+
+  deletePost(post: any) {
+    this.service.deletePost(post.id)
+      .subscribe(
+        response => {
+          let index = this.posts.indexOf(post);
+          this.posts.splice(index, 1);
+        },
+        (error: AppError) => {
+          if (error instanceof NotFoundError)
+            alert("This post has already been deleted");
+          else {
+            alert("An Unexpected Error occurred.");
+            console.log(error);
+          }
+        })
+  }
+}
+~~~

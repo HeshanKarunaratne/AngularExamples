@@ -1,3 +1,6 @@
+import { BadInput } from '../common/bad-input';
+import { NotFoundError } from './../common/not-found-error';
+import { AppError } from './../common/app-error';
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../services/post.service';
 
@@ -34,8 +37,8 @@ export class PostsComponent implements OnInit {
           post['id'] = id;
           this.posts.splice(0, 0, post);
         },
-        (error: Response) => {
-          if (error.status === 400) {
+        (error: AppError) => {
+          if (error instanceof BadInput) {
             //this.form.setErrors(error.json())
 
           } else {
@@ -62,8 +65,8 @@ export class PostsComponent implements OnInit {
           let index = this.posts.indexOf(post);
           this.posts.splice(index, 1);
         },
-        (error: Response) => {
-          if (error.status === 404)
+        (error: AppError) => {
+          if (error instanceof NotFoundError)
             alert("This post has already been deleted");
           else {
             alert("An Unexpected Error occurred.");
