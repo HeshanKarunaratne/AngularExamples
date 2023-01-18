@@ -1311,12 +1311,34 @@ Handling Unexpected Errors
 ~~~ts
   ngOnInit() {
     this.service.getPosts()
-      .subscribe(response => {
+      .subscribe(
+        response => {
         console.log(response);
         this.posts = response;
-      }, error => {
+      }, 
+      error => {
         alert("An Unexpected Error occurred.");
         console.log(error);
       })
+  }
+~~~
+
+Handling Expected Errors
+~~~ts
+ deletePost(post: any) {
+    this.service.deletePost(post.id)
+      .subscribe(
+        response => {
+          let index = this.posts.indexOf(post);
+          this.posts.splice(index, 1);
+        },
+        (error: Response) => {
+          if (error.status === 404)
+            alert("This post has already been deleted");
+          else {
+            alert("An Unexpected Error occurred.");
+            console.log(error);
+          }
+        })
   }
 ~~~

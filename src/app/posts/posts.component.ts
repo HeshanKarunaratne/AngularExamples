@@ -12,13 +12,15 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.service.getPosts()
-      .subscribe(response => {
-        console.log(response);
-        this.posts = response;
-      }, error => {
-        alert("An Unexpected Error occurred.");
-        console.log(error);
-      })
+      .subscribe(
+        response => {
+          console.log(response);
+          this.posts = response;
+        },
+        error => {
+          alert("An Unexpected Error occurred.");
+          console.log(error);
+        })
   }
 
   createPost(input: HTMLInputElement) {
@@ -26,14 +28,21 @@ export class PostsComponent implements OnInit {
     input.value = "";
 
     this.service.createPost(post)
-      .subscribe(data => {
-        let id = (data as any).id;
-        post['id'] = id;
-        this.posts.splice(0, 0, post);
-      }, error => {
-        alert("An Unexpected Error occurred.");
-        console.log(error);
-      });
+      .subscribe(
+        response => {
+          let id = (response as any).id;
+          post['id'] = id;
+          this.posts.splice(0, 0, post);
+        },
+        (error: Response) => {
+          if (error.status === 400) {
+            //this.form.setErrors(error.json())
+
+          } else {
+            alert("An Unexpected Error occurred.");
+            console.log(error);
+          }
+        });
   }
 
   updatePost(post: any) {
@@ -48,12 +57,18 @@ export class PostsComponent implements OnInit {
 
   deletePost(post: any) {
     this.service.deletePost(post.id)
-      .subscribe(response => {
-        let index = this.posts.indexOf(post);
-        this.posts.splice(index, 1);
-      }, error => {
-        alert("An Unexpected Error occurred.");
-        console.log(error);
-      })
+      .subscribe(
+        response => {
+          let index = this.posts.indexOf(post);
+          this.posts.splice(index, 1);
+        },
+        (error: Response) => {
+          if (error.status === 404)
+            alert("This post has already been deleted");
+          else {
+            alert("An Unexpected Error occurred.");
+            console.log(error);
+          }
+        })
   }
 }
