@@ -1438,3 +1438,35 @@ export class PostsComponent implements OnInit {
   }
 }
 ~~~
+
+Handle Unexpected Errors Globally
+Need to register this in app-module.ts as a object to replace ErrorHandler 
+~~~ts
+import { AppErrorHandler } from './common/app-error-handler';
+@NgModule({
+  declarations: [
+  ],
+  imports: [
+  ],
+  providers: [
+    {
+      provide: ErrorHandler, useClass: AppErrorHandler
+    }
+  ],
+  bootstrap: []
+})
+export class AppModule { }
+~~~
+
+Create a global MyErrorHanlder
+
+~~~ts
+import { ErrorHandler } from "@angular/core";
+
+export class AppErrorHandler implements ErrorHandler {
+    handleError(error: any): void {
+        alert("An Unexpected Error occurred.");
+        console.log(error);
+    }
+}
+~~~

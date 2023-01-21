@@ -1,3 +1,5 @@
+import { AppErrorHandler } from './common/app-error-handler';
+import { ErrorHandler } from '@angular/core';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { SummaryPipe } from './summary.pipe';
 import { AuthorsService } from './authors.service';
@@ -60,7 +62,10 @@ import { PostService } from '../app/services/post.service';
   providers: [
     CoursesService,
     AuthorsService,
-    PostService
+    PostService,
+    {
+      provide: ErrorHandler, useClass: AppErrorHandler
+    }
   ],
   bootstrap: [AppComponent]
 })
