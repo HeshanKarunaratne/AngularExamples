@@ -1473,3 +1473,9 @@ export class AppErrorHandler implements ErrorHandler {
 
 Optimistic Vs Pessimistic Way of Coding
 We can call an api and refresh the page base on the result or we can directly refresh the page and then call the api and if there is an error revert the ui
+
+Observables Vs Promises
+1) Can convert Observables to Promises
+2) Observables are lazy - nothing happens unless you subscribe
+3) Allows reactive programming
+4) Enables useful operators
