@@ -29,6 +29,7 @@ import { NewCourseFormBuilderComponent } from './new-course-form-builder/new-cou
 import { PasswordChangeFormComponent } from './password-change-form/password-change-form.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostService } from '../app/services/post.service';
+import { GithubFollowersComponent } from './github-followers/github-followers.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,8 @@ import { PostService } from '../app/services/post.service';
     NewCourseFormComponent,
     NewCourseFormBuilderComponent,
     PasswordChangeFormComponent,
-    PostsComponent
+    PostsComponent,
+    GithubFollowersComponent
   ],
   imports: [
     BrowserModule,
