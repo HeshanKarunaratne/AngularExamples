@@ -1,3 +1,4 @@
+import { GithubService } from './services/github.service';
 import { AppErrorHandler } from './common/app-error-handler';
 import { ErrorHandler } from '@angular/core';
 import { SignupFormComponent } from './signup-form/signup-form.component';
@@ -65,6 +66,7 @@ import { GithubFollowersComponent } from './github-followers/github-followers.co
     CoursesService,
     AuthorsService,
     PostService,
+    GithubService,
     {
       provide: ErrorHandler, useClass: AppErrorHandler
     }
