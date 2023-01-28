@@ -1479,3 +1479,43 @@ Observables Vs Promises
 2) Observables are lazy - nothing happens unless you subscribe
 3) Allows reactive programming
 4) Enables useful operators
+
+Routing Steps
+* Configure the routes
+* Add a router outlet
+* Add links
+
+How to define routes and components for each route
+
+~~~ts
+import { PostsComponent } from './posts/posts.component';
+import { GithubFollowersComponent } from './github-followers/github-followers.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { GithubProfileComponent } from './github-profile/github-profile.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { RouterModule } from '@angular/router';
+@NgModule({
+  declarations: [
+    PostsComponent,
+    GithubFollowersComponent,
+    NavbarComponent,
+    HomeComponent,
+    GithubProfileComponent,
+    NotFoundComponent
+  ],
+  imports: [
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: '/followers/:username', component: GithubProfileComponent },
+      { path: '/followers', component: GithubFollowersComponent },
+      { path: '/posts', component: PostsComponent },
+      { path: '**', component: NotFoundComponent },
+    ])
+  ],
+  providers: [
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+~~~

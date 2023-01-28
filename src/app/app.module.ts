@@ -31,6 +31,11 @@ import { PasswordChangeFormComponent } from './password-change-form/password-cha
 import { PostsComponent } from './posts/posts.component';
 import { PostService } from '../app/services/post.service';
 import { GithubFollowersComponent } from './github-followers/github-followers.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { GithubProfileComponent } from './github-profile/github-profile.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +57,11 @@ import { GithubFollowersComponent } from './github-followers/github-followers.co
     NewCourseFormBuilderComponent,
     PasswordChangeFormComponent,
     PostsComponent,
-    GithubFollowersComponent
+    GithubFollowersComponent,
+    NavbarComponent,
+    HomeComponent,
+    GithubProfileComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +69,14 @@ import { GithubFollowersComponent } from './github-followers/github-followers.co
     FontAwesomeModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: '/followers/:username', component: GithubProfileComponent },
+      { path: '/followers', component: GithubFollowersComponent },
+      { path: '/posts', component: PostsComponent },
+      { path: '**', component: NotFoundComponent },
+    ])
   ],
   providers: [
     CoursesService,
