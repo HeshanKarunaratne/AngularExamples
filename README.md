@@ -1481,7 +1481,7 @@ Observables Vs Promises
 4) Enables useful operators
 
 Routing Steps
-* Configure the routes
+* Configure the routes(dont use slash in beginning)
 * Add a router outlet
 * Add links
 
@@ -1507,9 +1507,9 @@ import { RouterModule } from '@angular/router';
   imports: [
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: '/followers/:username', component: GithubProfileComponent },
-      { path: '/followers', component: GithubFollowersComponent },
-      { path: '/posts', component: PostsComponent },
+      { path: 'followers/:username', component: GithubProfileComponent },
+      { path: 'followers', component: GithubFollowersComponent },
+      { path: 'posts', component: PostsComponent },
       { path: '**', component: NotFoundComponent },
     ])
   ],
@@ -1518,4 +1518,12 @@ import { RouterModule } from '@angular/router';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+~~~
+
+Make sure to use routerLink instead of href when using(href downloads full page onclick). 
+If you are using a simple route use routerLink as an attribute and a string value.
+If ypu are dealing with routeParameters use property binding syntax 
+
+~~~html
+<h4 class="media-heading"><a [routerLink]="['/followers', follower.id]">{{ follower.login }}</a></h4>
 ~~~
