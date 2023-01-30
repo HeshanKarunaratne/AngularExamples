@@ -1527,3 +1527,36 @@ If ypu are dealing with routeParameters use property binding syntax
 ~~~html
 <h4 class="media-heading"><a [routerLink]="['/followers', follower.id]">{{ follower.login }}</a></h4>
 ~~~
+
+routerLinkActive property
+~~~html
+<li routerLinkActive="active current" class="nav-item">
+    <a class="nav-link" routerLink="/followers">Followers</a>
+</li>
+~~~
+
+ParamMap
+
+~~~ts
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-github-profile',
+  templateUrl: './github-profile.component.html',
+  styleUrls: ['./github-profile.component.css']
+})
+export class GithubProfileComponent implements OnInit {
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.route.paramMap
+      .subscribe(params => {
+        let id = params.get("id");
+        console.log("id:", id);
+      })
+  }
+
+}
+~~~
