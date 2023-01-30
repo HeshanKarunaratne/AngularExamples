@@ -1560,3 +1560,20 @@ export class GithubProfileComponent implements OnInit {
 
 }
 ~~~
+
+Routes with multiple parameters
+
+~~~ts
+RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: 'followers/:id/:username', component: GithubProfileComponent },
+      { path: 'followers', component: GithubFollowersComponent },
+      { path: 'posts', component: PostsComponent },
+      { path: '**', component: NotFoundComponent },
+    ])
+~~~
+
+~~~html
+ <h4 class="media-heading"><a [routerLink]="['/followers', follower.id, follower.login]">{{ follower.login }}</a>
+  </h4>
+~~~
