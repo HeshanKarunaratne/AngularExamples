@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { GithubService } from '../services/github.service';
-import { combineLatest, map, switchMap } from 'rxjs';
+import { combineLatest, switchMap, map } from 'rxjs';
 
 @Component({
   selector: 'github-followers',
