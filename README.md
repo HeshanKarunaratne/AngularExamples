@@ -3,16 +3,20 @@
 Angular is a framework for building client applications in HTML, CSS, Javascript or Typescript
 
  - To work with Angular you need to install node.js(Get the latest stable version)
-    node --version
+   
+   - node --version
 
  - You need to have agular cli as well
-    npm install -g @angular/cli
+    
+    - npm install -g @angular/cli
  
  - Check angular version
-    ng version
+    
+    - ng version
 
  - Start angular app
-    ng serve
+    
+    - ng serve
 
 TypeScript Fundametals
  - Type Annotation
@@ -34,7 +38,7 @@ Install Typescript
 Convert .ts file to .js
  - tsc file_name.ts
 
-* In javascript variable declared with var keyword is scoped to the nearest function.
+ - In javascript variable declared with var keyword is scoped to the nearest function.
 
 Types in Typescript
 
@@ -104,12 +108,16 @@ pointer.draw();
 ~~~
 
 Ex: When Accessors are only available when targeting ES5 error occurs
-tsc LikeMain.ts --target ES5 && node LikeMain.js
+
+- tsc LikeMain.ts --target ES5 && node LikeMain.js
 
 Selectors
+
+~~~html
 <courses>             -> "courses"
 <div class="courses"> -> ".courses"
 <div id="courses">    -> "#courses"
+~~~
 
 Generate Components from cli
  - ng g c componentName
@@ -266,8 +274,9 @@ export class CoursesComponent {
 }
 ~~~
 
-ngModel directive is used for 2 way binding
-To access ngModel you need to import  @angular/forms
+- ngModel directive is used for 2 way binding
+
+- To access ngModel you need to import  @angular/forms
 
 Two-way Binding
 ~~~ts
@@ -344,10 +353,12 @@ export class CoursesComponent {
 
 Property(Input) and Event Binding(Output) to make a component more reusable.
 
+~~~html
 <favourite></favourite>
           ||
           \/
 <favourite [isFavourite]="post.isFavourite" (change)="onFavoutieChange()"></favourite>
+~~~
 
 1) Adding Input decorator- use aliases
 ~~~ts
@@ -432,8 +443,9 @@ export class AppComponent {
 }
 ~~~
 
-Different ways to define styles
-style tag in html > inline styles in html > styles in ts(styles or stylesUrl)
+- Different ways to define styles
+
+- style tag in html > inline styles in html > styles in ts(styles or stylesUrl)
 ~~~ts
 <style>
     .star-color {
@@ -479,8 +491,9 @@ export class StarComponent {
 
 Easy html tag generation
 
-div.panel.panel-default>div.panel-heading+div.panel.body
-PRESS tab to generate below format
+- div.panel.panel-default>div.panel-heading+div.panel.body
+
+- PRESS tab to generate below format
 
 ~~~html
 <div class="panel panel-default">
@@ -614,8 +627,9 @@ Can be converted to below format
 ~~~
 
 Creating Custom Directives:
-You can have custom directives to have more control over behaviour of dom elements.
-You can use @HostListener() decorator to subscribe to the events raised from the host dom objects
+
+- You can have custom directives to have more control over behaviour of dom elements.
+- You can use @HostListener() decorator to subscribe to the events raised from the host dom objects
 ~~~ts
 <input type="text" [appInputFormat]="'uppercase'" />
 
@@ -640,11 +654,11 @@ export class InputFormatDirective {
 }
 ~~~
 
-Form Control: value, touched, untouched, dirty, pristine, valid, errors
-Form Group: value, touched, untouched, dirty, pristine, valid, errors
+- Form Control: value, touched, untouched, dirty, pristine, valid, errors
+- Form Group: value, touched, untouched, dirty, pristine, valid, errors
 
-Reactive Forms: More control over validation login, Good for conplex forms, Unit testable
-Template Driven Forms: Simple Forms, Simple validation, Less code, Easier to create
+- Reactive Forms: More control over validation login, Good for conplex forms, Unit testable
+- Template Driven Forms: Simple Forms, Simple validation, Less code, Easier to create
 
 ngModel
 1) If adding ngmodel you need to add 'name' attribute as well
@@ -714,9 +728,9 @@ ngModelGroup
 </form>
 ~~~
 
-Two classes to keep track of state of Input fields and validity
-FormControl: One Input Field     <------------------------ngModel
-FormGroup: Group of Input Fields <------------------------ngForm       ------> output ngSubmit
+- Two classes to keep track of state of Input fields and validity
+1) FormControl: One Input Field     <------------------------ngModel
+2) FormGroup: Group of Input Fields <------------------------ngForm       ------> output ngSubmit
                                                           ngModelGroup
 
 
@@ -765,7 +779,7 @@ Radio Buttons
 Reactive Forms
 
 Need to import below module
-    import { ReactiveFormsModule } from '@angular/forms';
+- import { ReactiveFormsModule } from '@angular/forms';
 
 ~~~ts
 import { Component } from '@angular/core';
@@ -867,9 +881,9 @@ export class UsernameValidators {
 
 When we are using asynOperations for validatorFn the signature changes
 
-AsyncValidators: returns a Promise object of ValidationErrors or null
-For a Promise you need to supply a resolve and a reject
-Rather than using return use resolve and reject (when return used it automatically takes out from the block- but with resolve and reject this behaviour is not happening)
+- AsyncValidators: returns a Promise object of ValidationErrors or null
+- For a Promise you need to supply a resolve and a reject
+- Rather than using return use resolve and reject (when return used it automatically takes out from the block- but with resolve and reject this behaviour is not happening)
 
 ~~~ts
 import { AbstractControl, ValidationErrors } from "@angular/forms";
@@ -1303,8 +1317,8 @@ export class PostsComponent implements OnInit {
 }
 ~~~
 
-Unexpected Errors: Server is offline, Network is down, Unhandled exceptions
-Expected Errors: Not Found(404), Bad Request(400)
+- Unexpected Errors: Server is offline, Network is down, Unhandled exceptions
+- Expected Errors: Not Found(404), Bad Request(400)
 
 
 Handling Unexpected Errors
@@ -1439,8 +1453,8 @@ export class PostsComponent implements OnInit {
 }
 ~~~
 
-Handle Unexpected Errors Globally
-Need to register this in app-module.ts as a object to replace ErrorHandler 
+- Handle Unexpected Errors Globally
+- Need to register this in app-module.ts as a object to replace ErrorHandler 
 ~~~ts
 import { AppErrorHandler } from './common/app-error-handler';
 @NgModule({
@@ -1471,8 +1485,8 @@ export class AppErrorHandler implements ErrorHandler {
 }
 ~~~
 
-Optimistic Vs Pessimistic Way of Coding
-We can call an api and refresh the page base on the result or we can directly refresh the page and then call the api and if there is an error revert the ui
+- Optimistic Vs Pessimistic Way of Coding
+- We can call an api and refresh the page base on the result or we can directly refresh the page and then call the api and if there is an error revert the ui
 
 Observables Vs Promises
 1) Can convert Observables to Promises
@@ -1520,9 +1534,9 @@ import { RouterModule } from '@angular/router';
 export class AppModule { }
 ~~~
 
-Make sure to use routerLink instead of href when using(href downloads full page onclick). 
-If you are using a simple route use routerLink as an attribute and a string value.
-If ypu are dealing with routeParameters use property binding syntax 
+- Make sure to use routerLink instead of href when using(href downloads full page onclick). 
+- If you are using a simple route use routerLink as an attribute and a string value.
+- If ypu are dealing with routeParameters use property binding syntax 
 
 ~~~html
 <h4 class="media-heading"><a [routerLink]="['/followers', follower.id]">{{ follower.login }}</a></h4>
