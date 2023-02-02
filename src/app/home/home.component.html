@@ -2,6 +2,7 @@
 
 <ul class="list-group">
     <li *ngFor="let archiveDate of archiveDates" class="list-group-item">
-        <a href="">{{ archiveDate.year + "/" + archiveDate.month }}</a>
+        <a [routerLink]="['/archive', archiveDate.year, archiveDate.month]">{{ archiveDate.year + "/" +
+            archiveDate.month }}</a>
     </li>
 </ul>
