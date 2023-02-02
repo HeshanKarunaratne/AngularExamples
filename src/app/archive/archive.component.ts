@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-archive',
@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./archive.component.scss']
 })
 export class ArchiveComponent implements OnInit {
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
   year: any;
   month: any;
   ngOnInit(): void {
@@ -18,6 +18,10 @@ export class ArchiveComponent implements OnInit {
     this.month = month;
     console.log("year: " + year);
     console.log("month: " + month);
+  }
+
+  goBack() {
+    this.router.navigate(['']);
   }
 
 }
