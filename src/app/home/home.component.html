@@ -1,3 +1,7 @@
-<p>
-  home works!
-</p>
+<h1>Home Page</h1>
+
+<ul class="list-group">
+    <li *ngFor="let archiveDate of archiveDates" class="list-group-item">
+        <a href="">{{ archiveDate.year + "/" + archiveDate.month }}</a>
+    </li>
+</ul>
