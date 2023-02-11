@@ -1,8 +1,10 @@
-<h1>Home Page</h1>
 
-<ul class="list-group">
-    <li *ngFor="let archiveDate of archiveDates" class="list-group-item">
-        <a [routerLink]="['/archive', archiveDate.year, archiveDate.month]">{{ archiveDate.year + "/" +
-            archiveDate.month }}</a>
-    </li>
+<h1>Home Page</h1>
+<p>
+  Welcome [NAME]
+</p>
+<ul>
+  <li><a routerLink="/admin">Admin</a></li>
+  <li><a routerLink="/login">Login</a></li>
+  <li><a>Logout</a></li>
 </ul>
