@@ -1689,3 +1689,64 @@ export class GithubProfileComponent {
 
 }
 ~~~
+
+Authentication and Authorization
+
+- Login Implementation
+
+~~~ts
+import { AuthService } from './../services/auth.service';
+import { Component } from '@angular/core';
+import { Router } from "@angular/router";
+
+@Component({
+  selector: 'login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+  invalidLogin: boolean = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService) { }
+
+  signIn(credentials: any) {
+    this.authService.login(credentials)
+      .subscribe(result => {
+        if (result)
+          this.router.navigate(['/']);
+        else
+          this.invalidLogin = true;
+      });
+  }
+}
+~~~
+
+~~~ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
+
+@Injectable()
+export class AuthService {
+  constructor(private http: HttpClient) {
+  }
+
+  login(credentials: any) {
+    return this.http.post('/api/authenticate',
+      JSON.stringify(credentials))
+      .pipe(map(res => {
+        if (res != undefined) {
+          let val = Object.values(res);
+          let token = val[0];
+          if (token) {
+            localStorage.setItem("token", token);
+            return true;
+          }
+        }
+        return false;
+      }))
+  }
+}
+~~~

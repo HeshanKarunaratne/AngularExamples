@@ -18,19 +18,18 @@ export class fakeBackendFactory implements HttpInterceptor {
       return next.handle(request);
 
     function authenticate() {
-      const { username, password } = JSON.parse(body);
-
-      if (username === 'mosh@domain.com' && password === '1234')
+      const { email, password } = JSON.parse(body);
+      if (email === 'mosh@domain.com' && password === '1234')
         return of(new HttpResponse({
           status: 200,
           body: { token: token }
         }))
       else
-        return of(new HttpResponse({ status: 400 }))
+        return of(new HttpResponse({ status: 200 }))
     }
 
     function getOrders() {
-      if (request.headers.get('Authorization') === 'bearer ' + token)
+      if (request.headers.get('Authorization') === 'Bearer ' + token)
         return of(new HttpResponse({
           status: 200,
           body: [1, 2, 3]
