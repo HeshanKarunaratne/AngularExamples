@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
@@ -9,7 +9,12 @@ export class OrderService {
   }
 
   getOrders() {
-    return this.http.get('/api/orders')
-      .pipe((response: any) => response.json());
+    let token = localStorage.getItem('token')
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    return this.http.get('/api/orders', httpOptions);
   }
 }
