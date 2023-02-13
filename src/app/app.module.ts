@@ -13,6 +13,7 @@ import { NoAccessComponent } from './no-access/no-access.component';
 import { OrderService } from './services/order.service';
 import { AuthService } from './services/auth.service';
 import { fakeBackendFactory } from './helpers/fake-backend';
+import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { fakeBackendFactory } from './helpers/fake-backend';
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'admin', component: AdminComponent },
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
       { path: 'login', component: LoginComponent },
       { path: 'no-access', component: NoAccessComponent }
     ])
@@ -38,11 +39,12 @@ import { fakeBackendFactory } from './helpers/fake-backend';
   providers: [
     OrderService,
     AuthService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: fakeBackendFactory,
       multi: true
-    },
+    }
   ],
   bootstrap: [AppComponent]
 })

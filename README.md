@@ -1805,3 +1805,97 @@ export class AuthService {
   }
 }
 ~~~
+
+Admin Based Role
+
+~~~html
+<li *ngIf="authService.isLoggedIn() && authService.getCurrentUser().admin"><a routerLink="/admin">Admin</a></li>
+~~~
+
+~~~ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+@Injectable()
+export class AuthService {
+  constructor(private http: HttpClient) {
+  }
+
+  getCurrentUser() {
+    let token = localStorage.getItem("token");
+    if (!token) return null;
+
+    return new JwtHelperService().decodeToken(token);
+  }
+}
+~~~
+
+canActivate interface
+
+- ng g s services/auth-guard
+
+~~~ts
+import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
+import { AuthService } from './auth.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  canActivate() {
+    if (this.authService.isLoggedIn()) return true;
+
+    this.router.navigate(['/login']);
+    return false;
+  }
+}
+~~~
+
+~~~ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NoAccessComponent } from './no-access/no-access.component';
+import { OrderService } from './services/order.service';
+import { AuthService } from './services/auth.service';
+import { fakeBackendFactory } from './helpers/fake-backend';
+import { AuthGuard } from './services/auth-guard.service';
+
+@NgModule({
+  declarations: [
+  ],
+  imports: [
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+      { path: 'login', component: LoginComponent },
+      { path: 'no-access', component: NoAccessComponent }
+    ])
+  ],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: fakeBackendFactory,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+~~~
