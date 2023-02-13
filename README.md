@@ -1899,3 +1899,58 @@ import { AuthGuard } from './services/auth-guard.service';
 })
 export class AppModule { }
 ~~~
+
+ReturnUrl
+
+~~~ts
+import { Router, RouterStateSnapshot } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
+import { AuthService } from './auth.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  canActivate(route: any, state: RouterStateSnapshot) {
+    if (this.authService.isLoggedIn()) return true;
+
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    return false;
+  }
+}
+~~~
+
+~~~ts
+import { AuthService } from './../services/auth.service';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+
+@Component({
+  selector: 'login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+  invalidLogin: boolean = false;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService) { }
+
+  signIn(credentials: any) {
+    this.authService.login(credentials)
+      .subscribe(result => {
+        if (result) {
+          let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          this.router.navigate([returnUrl || '/']);
+        } else
+          this.invalidLogin = true;
+      });
+  }
+}
+~~~
