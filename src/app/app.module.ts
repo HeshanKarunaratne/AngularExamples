@@ -14,6 +14,7 @@ import { OrderService } from './services/order.service';
 import { AuthService } from './services/auth.service';
 import { fakeBackendFactory } from './helpers/fake-backend';
 import { AuthGuard } from './services/auth-guard.service';
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { AuthGuard } from './services/auth-guard.service';
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'login', component: LoginComponent },
       { path: 'no-access', component: NoAccessComponent }
     ])
@@ -40,6 +41,7 @@ import { AuthGuard } from './services/auth-guard.service';
     OrderService,
     AuthService,
     AuthGuard,
+    AdminAuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: fakeBackendFactory,
