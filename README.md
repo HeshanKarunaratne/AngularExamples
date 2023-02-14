@@ -2028,3 +2028,14 @@ export class OrderService {
   }
 }
 ~~~
+
+Deployment
+
+Optimization Techniques
+- Minification
+- Uglification
+- Bundling
+- Dead code elimination
+
+All these can be acquired through 
+- ng build --prod
