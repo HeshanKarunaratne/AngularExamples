@@ -2088,4 +2088,4 @@ firebase.json
 - ng build --prod 
 - firebase deploy
 
-Deploying to Heroku
+Deploying to Heroku(PAAS)
