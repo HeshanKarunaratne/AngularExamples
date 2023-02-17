@@ -2059,3 +2059,33 @@ Other Deployment Options
 - Github pages(no backend)
 - Firebase(as backend)
 - Heroku(custom backend)
+
+Deploying to Github Pages
+- npm i -g angular-cli-ghpages
+- ng build --prod --base-href="https://{username}.github.io/{repo-name}/"
+- ngh
+
+Deploying to Firebase
+- npm i -g firebase-tools
+- firebase login
+- firebase init
+
+firebase.json
+~~~json
+{
+  "hosting": {
+    "public": "dist",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+~~~
+
+- ng build --prod 
+- firebase deploy
+
+Deploying to Heroku
