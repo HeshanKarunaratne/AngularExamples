@@ -2039,3 +2039,23 @@ Optimization Techniques
 
 All these can be acquired through 
 - ng build --prod
+
+Add a custom Environment and update .angular-cli.json
+
+~~~ts
+"environments": {
+    "dev": "environments/environment.ts",
+    "prod": "environments/environment.prod.ts"
+}
+~~~
+
+Linting
+- ng lint
+
+Fix issues in lint
+- ng lint --fix
+
+Other Deployment Options
+- Github pages(no backend)
+- Firebase(as backend)
+- Heroku(custom backend)
