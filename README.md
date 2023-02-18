@@ -2089,3 +2089,29 @@ firebase.json
 - firebase deploy
 
 Deploying to Heroku(PAAS)
+
+- heroku --version
+- heroku lohin
+  - email
+  - password
+- heroku create 
+- heroku open
+
+For heroku to work need to move 
+  - @angular/cli
+  - @angular/compiler-cli
+  - typescript
+from devDependencies => dependencies 
+
+Add below script in package.json
+~~~json
+{
+  "scripts":{
+    "start":"node server.js",
+    "postinstall":"ng build --prod"
+  }
+}
+~~~
+
+- npm i express --save
+- git push heroku master
